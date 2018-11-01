@@ -15,20 +15,32 @@ steps to create the artificial neural network
 
 using namespace std;
 
-typedef struct neuron {
-		int data;
-		int activation_function(){
-			/* TO DO */
-		};
-}neuron;
+class neuron{
+public:
+	float weights;
+
+	neuron(){
+		weights = 1000;
+	}
+
+private:
+
+	float sigmoidal_activation();
+
+	float tanh_activation();
+
+	float relu_activation();
+};
 
 class nn{
 
-	public :
+public :
 
 	neuron*** ptr_neuron;
+	neuron* input_layer;
+	neuron* middle_layer;
+	neuron* output_layer;
 
-	// default constructor
 	nn()
 	{
 		/* create an ANN of 3 layers,
@@ -36,33 +48,22 @@ class nn{
 		   middle layer will consist of 255 neurons,
 		   output layer will consist of two neurons,
 		*/
-		ptr_neuron = new neuron**[255];
-		for( int i = 0 ; i < 255 ; i++ )
-		{
-			ptr_neuron[i] = new neuron*[255];
-			
-	
-	}
+		neuron input_layer[255];
+		neuron middle_layer[255];
+		neuron output_layer[2];
+	};
 
-	// parameterized constructor
-	nn(int no_of_neurons_in_input_layer, int no_of_neurons_in_middle_layer, int no_of_neurons_in_output_layer)
-	{
-		ptr_neuron = new neuron**[no_of_neurons_in_input_layer];
-	}
+private:
+	nn(int no_of_neurons_in_input_layer, int no_of_neurons_in_middle_layer, int no_of_neurons_in_output_layer){
+		neuron input_layer[no_of_neurons_in_output_layer];
+		neuron middle_layer[no_of_neurons_in_middle_layer];
+		neuron output_layer[no_of_neurons_in_output_layer];
+	};
 
-	// feedforward 
-	void feedforward()
-	{
-	}
-
-	// backpropagation
-	void backpropagation()
-	{
-	} 
+	void feedforward();
+	void backpropagation();
 
 };
-
-
 
 int main()
 {
